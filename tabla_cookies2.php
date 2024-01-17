@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>tabla_cookies</title>
 </head>
 <body>
 <?php
@@ -27,15 +27,14 @@ if (isset($_COOKIE) && count($_COOKIE) > 0) {
     echo "<h2>Eliminar cookies:</h2>";
     echo "<form method='post' action=''>
             <label for='delete_cookie'>Selecciona una cookie para eliminar:</label>
-            <select name='delete_cookie' id='delete_cookie'>";
+            <select name='borrar_cookie' id='borrar_cookie'>";
 
-    foreach ($_COOKIE as $clave => $valor) {
-        echo "<option value='$clave'>$clave</option>";
-    }
-
-    echo "</select>
-            <input type='submit' value='Eliminar'>
-          </form>";
+            if (isset($_POST['eliminar_cookies'])) {
+                foreach ($_COOKIE as $clave => $valor) {
+                    setcookie($clave, "", time() - 3600);
+                    header("Location:cookies2.php");
+                }
+            }
 }
 ?>
 
